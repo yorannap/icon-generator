@@ -30,10 +30,28 @@
         <label for="stroke-type-round">Round</label><br>
         <input type="radio" id="stroke-type-square" name="stroke-type" value="butt">
         <label for="stroke-type-square">Square</label><br>
-      
+    </div>
+    <div id="options-border" class="form-section">
+      <h3>Border</h3>
+      <label class="option">Border style
+        <select id="border-style" name="border-style">
+          <option value="fill">Fill</option>
+          <option value="outline">Outline</option>
+          <option value="none">None</option>
+        </select>
+      </label>
+      <label class="option">Border radius
+        <input type="range" name="border-radius" id="border-radius" min="0" max="225" step="25">
+      </label>
+      <label class="option">Border colour
+        <input type="color" name="border-colour" id="border-color">
+        <input type="text" name="border-colour-value" id="border-color-value"  maxlength="7" value="">
+      </label>
+      <label class="option">Opaque
+        <input type="checkbox" id="border-opaque" name="border-opaque" value="" checked>
+      </label>
     </div>
     <button id="options-download">Download</button>
-    <div id="d"></div>
   </div>
   <div id="icon-grid">
     <div class="icon-container">

@@ -2,6 +2,9 @@
 let fileType = 'jpeg';
 let zipName = 'icons';
 let zipFolderName = zipName;
+let initialised = false;
+let svgBorder;
+let customBorderColourSet = false;
 
 // selectors colour
 let colorSecondary = document.querySelector('#secondary-color');
@@ -11,34 +14,23 @@ let colorPrimaryValue = document.querySelector('#primary-value');
 // selectors stroke
 let strokeWidth = document.querySelector('#stroke-width');
 let strokeTypes = Array.from(document.getElementsByName('stroke-type'));
-console.log(strokeTypes);
+// selectors border
+let borderStyle = document.querySelector('#border-style');
+let borderRadius = document.querySelector('#border-radius');
+let borderColour = document.querySelector('#border-color');
+let borderColourValue = document.querySelector('#border-color-value');
+let borderOpaque = document.querySelector('#border-opaque');
 // selectors other
 let iconGrid = document.querySelector('#icon-grid');
-// let iconsG = document.querySelectorAll('.icon-container svg g');
 let downloadButton = document.querySelector('#options-download');
 let svgIcons = Array.from(document.querySelectorAll('#icon-grid svg'));
 
-// create border for icons
-svgIcons.forEach(svg => {
-  let svgBorder = document.createElementNS('http://www.w3.org/2000/svg','rect');
-  svgBorder.setAttribute('fill','orange');
-  svgBorder.setAttribute('fill-opacity','0.1');
-  svgBorder.setAttribute('stroke', colorPrimary.value);
-  svgBorder.setAttribute('x','25');
-  svgBorder.setAttribute('y','25');
-  svgBorder.setAttribute('rx','50');
-  svgBorder.setAttribute('width','450');
-  svgBorder.setAttribute('height','450');
-  svg.insertBefore(svgBorder, svg.firstChild);
-});
-
 let svgPrimary = Array.from(document.querySelectorAll('svg .cls-2'));
 let svgSecondary = Array.from(document.querySelectorAll('svg .cls-1'));
-let svgBorders = Array.from(document.querySelectorAll('svg rect'));
-let svgPaths = [...svgPrimary, ...svgSecondary, ...svgBorders];
+let svgPaths = [...svgPrimary, ...svgSecondary];
 
 
-// listen to download button clock
+// listen to download button click
 downloadButton.addEventListener('click', downloadIcons);
 // listen to color value change
 colorPrimary.addEventListener('input', updateColor);
@@ -52,16 +44,91 @@ colorSecondaryValue.addEventListener('input', updateColorValue);
 strokeTypes.forEach(type => {
   type.addEventListener('input', updateStroke);
 });
+// listen to border style input
+borderStyle.addEventListener('input', updateBorders);
+// listen to border radius input
+borderRadius.addEventListener('input', updateBorders);
+// listen to border colour value
+borderColour.addEventListener('input', updateBorders);
+// listen to border hex colour value
+borderColourValue.addEventListener('input', updateBorderColorValue);
+// listen to custom border colour being set
+borderColour.addEventListener('click', () => customBorderColourSet = true);
+borderColourValue.addEventListener('click', () => customBorderColourSet = true);
+// listen to border opaque
+borderOpaque.addEventListener('input', updateBorders);
 
 // initialise and set defaults
 function init() {
   colorPrimaryValue.value = '#000000';
   colorSecondaryValue.value = '#000000';
+  borderColourValue.value = colorPrimaryValue.value;
   strokeWidth.value = '5';
   updateStroke();
   updateColorValue();
+  createBorders();
 }
 init();
+
+// create borders
+function createBorders() {
+  svgIcons.forEach(svg => {
+    newBorder = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    newBorder.setAttribute('width','450');
+    newBorder.setAttribute('height','450');
+    newBorder.setAttribute('x','25');
+    newBorder.setAttribute('y','25');
+    newBorder.setAttribute('class','svg-border');
+    svg.insertBefore(newBorder, svg.firstChild);
+    updateBorderColorValue();
+  });   
+}
+
+// update borders for icons
+function updateBorders(text) {
+  if (text !== 'no') { // don't sync input values for custom hex
+    borderColourValue.value = borderColour.value;
+  }
+  if(borderOpaque.checked) {
+    opacity = 0.1; // set opaque opacity
+  }
+  else {
+    opacity = 1.0;
+  }
+    svgIcons.forEach(svg => {
+      svgBorder = svg.firstChild;
+      if (borderStyle.value === 'outline') {
+        svgBorder.setAttribute('fill', 'transparent');
+        svgBorder.setAttribute('stroke', borderColour.value);
+        svgBorder.setAttribute('stroke-opacity', opacity);
+        svgBorder.setAttribute('stroke-width', strokeWidth.value);
+        
+      }
+      else if (borderStyle.value === 'fill') {
+        svgBorder.setAttribute('fill', borderColour.value);
+        svgBorder.setAttribute('fill-opacity', opacity);
+        svgBorder.setAttribute('stroke-width', '0');
+        
+      }
+      else if (borderStyle.value === 'none') {
+        svgBorder.setAttribute('stroke-width', '0');
+        svgBorder.setAttribute('fill', 'transparent');
+      }
+      svgBorder.setAttribute('rx', borderRadius.value);
+    });
+}
+
+// update border colour hex value
+function updateBorderColorValue() {
+  if (customBorderColourSet) {
+    borderColour.value = borderColourValue.value;
+    updateBorders('no');
+  }
+  else {
+    borderColour.value = colorPrimary.value;
+    updateBorders();
+  }
+}
 
 // update colour value
 function updateColorValue() {
@@ -82,7 +149,8 @@ function updateColor(text) {
   svgSecondary.forEach(path => {
     path.style.stroke = colorSecondary.value;
   });
-  
+  updateBorders();
+  updateBorderColorValue();
 };
 
 // update stroke when input changed
@@ -99,6 +167,7 @@ function updateStroke() {
     path.style.strokeWidth = strokeWidth.value;
     path.style.strokeLinecap = strokeType;
   });
+  updateBorders();
 }
 
 // declare zip file structure
