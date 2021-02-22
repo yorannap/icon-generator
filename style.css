@@ -1,0 +1,28 @@
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#icon-grid {
+  max-width: 500px;
+  margin: auto;
+}
+
+#icon-grid div {
+  width: 40%;
+  float: left;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.form-section {
+  display: block;
+  margin-bottom: 20px;
+}
+
+label.option {
+  margin-bottom: 20px;
+  display: block;
+}
