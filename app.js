@@ -60,7 +60,7 @@ borderOpaque.addEventListener('input', updateBorders);
 
 // initialise and set defaults
 function init() {
-  colorPrimaryValue.value = '#000000';
+  colorPrimaryValue.value = '#ffffff';
   colorSecondaryValue.value = '#000000';
   borderColourValue.value = colorPrimaryValue.value;
   strokeWidth.value = '5';
@@ -69,6 +69,18 @@ function init() {
   createBorders();
 }
 init();
+
+function injectIcons() {
+fetch('../icons/Icons_About.svg', {mode: 'no-cors'})
+  .then(function(res){
+    return res.text();
+  })
+  .then(function(data) {
+    console.log(data);
+  });
+}
+
+injectIcons();
 
 // create borders
 function createBorders() {
