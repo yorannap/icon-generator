@@ -1,8 +1,9 @@
 // variables
-let fileType = 'jpeg';
+let fileType = 'png';
 let zipName = 'icons';
 let zipFolderName = zipName;
 let initialised = false;
+let imageQuality = 3;
 let svgBorder;
 let customBorderColourSet = false;
 
@@ -60,7 +61,7 @@ borderOpaque.addEventListener('input', updateBorders);
 
 // initialise and set defaults
 function init() {
-  colorPrimaryValue.value = '#ffffff';
+  colorPrimaryValue.value = '#000000';
   colorSecondaryValue.value = '#000000';
   borderColourValue.value = colorPrimaryValue.value;
   strokeWidth.value = '5';
@@ -69,18 +70,6 @@ function init() {
   createBorders();
 }
 init();
-
-function injectIcons() {
-fetch('../icons/Icons_About.svg', {mode: 'no-cors'})
-  .then(function(res){
-    return res.text();
-  })
-  .then(function(data) {
-    console.log(data);
-  });
-}
-
-injectIcons();
 
 // create borders
 function createBorders() {
@@ -198,8 +187,8 @@ function downloadIcons(e) {
       // loop through each svg
       icons.forEach((icon, index) => {
         // set variables
-        let iconWidth = icon.getBoundingClientRect().width;
-        let iconHeight = icon.getBoundingClientRect().height;
+        let iconWidth = icon.getBoundingClientRect().width * imageQuality;
+        let iconHeight = icon.getBoundingClientRect().height * imageQuality;
         let outerHTML = icon.outerHTML;
         let blob = new Blob([outerHTML], { type: 'image/svg+xml' });
         let blobURL = URL.createObjectURL(blob);
