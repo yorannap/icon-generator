@@ -17,13 +17,29 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-body {
+.cls-3 {
+  stroke: none!important;
+}
+
+body, button, input, div {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.form-section {
+  padding-bottom: 20px;
+  border-bottom: solid #f3f3f3 1px;
+}
+
+h3 {
+  font-weight: 600;
 }
 
 #icon-grid div {
-  width: 15vw;
+  width: 20%;
+  padding: 10px;
   float: left;
 }
 
@@ -37,20 +53,86 @@ svg {
   margin-bottom: 20px;
 }
 
-label.option {
-  margin-bottom: 20px;
-  display: block;
-}
-
 #inputs {
-  margin: 50px;
+  margin: 50px auto;
+  padding: 20px 50px;
   border-right: solid #f3f3f3 1px;
-  max-width: 600px;
   width: 20vw;
   float: left;
 }
 
 #icon-grid {
-  margin: 50px auto;
-  max-width: 80vw;
+  margin: 10px auto;
+  padding: 20px;
+  width: 80vw;
+  float: left;
+}
+
+#options-download {
+  background-color: #17aacc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 120%;
+  margin: 0;
+}
+
+#latest-update {
+  margin-top: 15px;
+  font-size: 70%;
+  opacity: 0.3;
+}
+
+#latest-update span {
+  font-style: italic;
+}
+
+#options-download:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+input[type="color"] {
+  width: 30%;
+}
+
+input[type="text"] {
+  width: 60%;
+}
+
+label.block {
+  display: block;
+}
+label.option {
+  margin-top: 20px;
+}
+
+#logo {
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+@media only screen and (max-width: 1200px) {
+  #icon-grid {
+    width: 70vw;
+  }
+  #inputs {
+    width: 30vw;
+  }
+  #icon-grid div {
+    width: 25%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #icon-grid {
+    width: 50vw;
+  }
+  #inputs {
+    width: 50vw;
+  }
+  #icon-grid div {
+    width: 50%;
+  }
 }
