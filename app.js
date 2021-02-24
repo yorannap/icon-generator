@@ -228,6 +228,7 @@ iconsInjected.then(function() { // launch app
     updateBorders();
   }
 
+  
   // declare zip file structure
   let jsZip = new JSZip();
   let folder = jsZip.folder(zipName);
