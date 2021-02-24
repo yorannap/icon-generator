@@ -76,12 +76,14 @@ svg {
   border-radius: 5px;
   font-size: 120%;
   margin: 0;
+  width: 100%;
 }
 
 #latest-update {
   margin-top: 15px;
   font-size: 70%;
   opacity: 0.3;
+  text-align: center;
 }
 
 #latest-update span {
@@ -98,7 +100,7 @@ input[type="color"] {
 }
 
 input[type="text"] {
-  width: 60%;
+  width: 65%;
 }
 
 label.block {
