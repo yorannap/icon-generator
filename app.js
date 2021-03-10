@@ -34,7 +34,7 @@ iconsFetched = new Promise(function(resolve) {
           if (index === LinkCount - 1) {
             setTimeout(() => {
               resolve();
-            }, 100);
+            }, 500);
           }
         });
       });
@@ -55,7 +55,7 @@ iconsInjected = new Promise(function(resolve) {
         if(index === LinkCount -1) {
           setTimeout(() => {
             resolve();
-          }, 100);
+          }, 500);
         }
       });
     });
