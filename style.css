@@ -64,7 +64,7 @@ svg {
 #icon-grid {
   margin: 10px auto;
   padding: 20px;
-  width: 80vw;
+  width: 75vw;
   float: left;
 }
 
@@ -117,7 +117,7 @@ label.option {
 
 @media only screen and (max-width: 1200px) {
   #icon-grid {
-    width: 70vw;
+    width: 65vw;
   }
   #inputs {
     width: 30vw;
@@ -129,7 +129,7 @@ label.option {
 
 @media only screen and (max-width: 700px) {
   #icon-grid {
-    width: 50vw;
+    width: 45vw;
   }
   #inputs {
     width: 50vw;
